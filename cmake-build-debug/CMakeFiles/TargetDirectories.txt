@@ -1,0 +1,3 @@
+C:/Users/rodri/OneDrive/Escritorio/ProyectoSemestral_EDD/Deteccion-de-patrones-en-multiples-archivos/cmake-build-debug/CMakeFiles/Deteccion_de_patrones_en_multiples_archivos.dir
+C:/Users/rodri/OneDrive/Escritorio/ProyectoSemestral_EDD/Deteccion-de-patrones-en-multiples-archivos/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/rodri/OneDrive/Escritorio/ProyectoSemestral_EDD/Deteccion-de-patrones-en-multiples-archivos/cmake-build-debug/CMakeFiles/rebuild_cache.dir
