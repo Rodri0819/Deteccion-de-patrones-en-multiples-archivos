@@ -95,6 +95,13 @@
 				1,
 				2
 			]
+		},
+		{
+			"name" : "Header Files",
+			"sourceIndexes" : 
+			[
+				3
+			]
 		}
 	],
 	"sources" : 
@@ -116,6 +123,11 @@
 			"compileGroupIndex" : 0,
 			"path" : "estructuras/suffix_array.cpp",
 			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "algoritmos/Boyer-Moore.h",
+			"sourceGroupIndex" : 1
 		}
 	],
 	"type" : "EXECUTABLE"
