@@ -49,15 +49,21 @@ cmake_ninja_workdir = C$:/Users/rodri/OneDrive/Escritorio/ProyectoSemestral_EDD/
 
 build cmake_object_order_depends_target_Deteccion_de_patrones_en_multiples_archivos: phony || .
 
+build CMakeFiles/Deteccion_de_patrones_en_multiples_archivos.dir/main.cpp.obj: CXX_COMPILER__Deteccion_de_patrones_en_multiples_archivos_unscanned_Debug C$:/Users/rodri/OneDrive/Escritorio/ProyectoSemestral_EDD/Deteccion-de-patrones-en-multiples-archivos/main.cpp || cmake_object_order_depends_target_Deteccion_de_patrones_en_multiples_archivos
+  DEP_FILE = CMakeFiles\Deteccion_de_patrones_en_multiples_archivos.dir\main.cpp.obj.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\Deteccion_de_patrones_en_multiples_archivos.dir
+  OBJECT_FILE_DIR = CMakeFiles\Deteccion_de_patrones_en_multiples_archivos.dir
+
 build CMakeFiles/Deteccion_de_patrones_en_multiples_archivos.dir/algoritmos/Boyer-Moore.cpp.obj: CXX_COMPILER__Deteccion_de_patrones_en_multiples_archivos_unscanned_Debug C$:/Users/rodri/OneDrive/Escritorio/ProyectoSemestral_EDD/Deteccion-de-patrones-en-multiples-archivos/algoritmos/Boyer-Moore.cpp || cmake_object_order_depends_target_Deteccion_de_patrones_en_multiples_archivos
   DEP_FILE = CMakeFiles\Deteccion_de_patrones_en_multiples_archivos.dir\algoritmos\Boyer-Moore.cpp.obj.d
-  FLAGS = -g -std=gnu++14 -fdiagnostics-color=always
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\Deteccion_de_patrones_en_multiples_archivos.dir
   OBJECT_FILE_DIR = CMakeFiles\Deteccion_de_patrones_en_multiples_archivos.dir\algoritmos
 
 build CMakeFiles/Deteccion_de_patrones_en_multiples_archivos.dir/estructuras/suffix_array.cpp.obj: CXX_COMPILER__Deteccion_de_patrones_en_multiples_archivos_unscanned_Debug C$:/Users/rodri/OneDrive/Escritorio/ProyectoSemestral_EDD/Deteccion-de-patrones-en-multiples-archivos/estructuras/suffix_array.cpp || cmake_object_order_depends_target_Deteccion_de_patrones_en_multiples_archivos
   DEP_FILE = CMakeFiles\Deteccion_de_patrones_en_multiples_archivos.dir\estructuras\suffix_array.cpp.obj.d
-  FLAGS = -g -std=gnu++14 -fdiagnostics-color=always
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\Deteccion_de_patrones_en_multiples_archivos.dir
   OBJECT_FILE_DIR = CMakeFiles\Deteccion_de_patrones_en_multiples_archivos.dir\estructuras
 
@@ -69,7 +75,7 @@ build CMakeFiles/Deteccion_de_patrones_en_multiples_archivos.dir/estructuras/suf
 #############################################
 # Link the executable Deteccion_de_patrones_en_multiples_archivos.exe
 
-build Deteccion_de_patrones_en_multiples_archivos.exe: CXX_EXECUTABLE_LINKER__Deteccion_de_patrones_en_multiples_archivos_Debug CMakeFiles/Deteccion_de_patrones_en_multiples_archivos.dir/algoritmos/Boyer-Moore.cpp.obj CMakeFiles/Deteccion_de_patrones_en_multiples_archivos.dir/estructuras/suffix_array.cpp.obj
+build Deteccion_de_patrones_en_multiples_archivos.exe: CXX_EXECUTABLE_LINKER__Deteccion_de_patrones_en_multiples_archivos_Debug CMakeFiles/Deteccion_de_patrones_en_multiples_archivos.dir/main.cpp.obj CMakeFiles/Deteccion_de_patrones_en_multiples_archivos.dir/algoritmos/Boyer-Moore.cpp.obj CMakeFiles/Deteccion_de_patrones_en_multiples_archivos.dir/estructuras/suffix_array.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Deteccion_de_patrones_en_multiples_archivos.dir
