@@ -9,7 +9,7 @@ using namespace std;
 unordered_map<char, int> TablaDeOcurrencia(const string& patron) {
     unordered_map<char, int> tabla;
     int m = patron.size();
-    //Recorremos el patron de derecha a izquierda
+    //Recorremos el patrones de derecha a izquierda
     for (int i = m - 1, pos = 0; i >= 0; --i, ++pos) {
         //Si el caracter no ha sido registrado todavia
         if (tabla.find(patron[i]) == tabla.end()) {
@@ -114,9 +114,9 @@ std::vector<int> BoyerMooreSearch(const std::string& texto, const std::string& p
             //Busca el valor que falló en la tabla de malcaracter
             auto it = malCaracter.find(c);
 
-            //Si c no está en el patron
+            //Si c no está en el patrones
             if (it != malCaracter.end()) {
-                // carácter sí está en el patrón, calcula cuanto mover el patron para alinaer c con su ultima aparicion, restando j(posición fallida) - posición en la ultima aparición de c en el patrón
+                // carácter sí está en el patrón, calcula cuanto mover el patrones para alinaer c con su ultima aparicion, restando j(posición fallida) - posición en la ultima aparición de c en el patrón
                 salto_mc = std::max(1, j - it->second);
             } else {
                 // carácter no está en el patrón → saltar patrón completo

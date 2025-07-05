@@ -5,11 +5,10 @@ EJECUTABLE="./main"
 
 DOCUMENTOS=(10 20 50 100)
 PATRONES=(100 200 500 1000)
-ALGORITMOS=("BM" "KMP" "RK")
+ALGORITMOS=("BM" "KMP" "RK" "SA")
 
 REPETICIONES=20
 
-# Cabecera del CSV
 echo "Algoritmo,NumDocumentos,NumPatrones,Tiempo" > "$OUTPUT"
 
 for alg in "${ALGORITMOS[@]}"; do
