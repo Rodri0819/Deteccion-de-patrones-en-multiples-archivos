@@ -2,6 +2,7 @@
 #include <vector>
 #include <fstream>
 #include <chrono>
+#include <numeric>
 #include "algoritmos/Boyer-Moore.h"
 #include "estructuras/suffix_array.h"
 #include "utils/cargarDocumentos.h"
@@ -40,8 +41,8 @@ int main(int argc, char* argv[]) {
     string algoritmo = argv[3];
 
     if (algoritmo != "BM" && algoritmo != "SA") {
-        cerr << "Algoritmo inválido: " << algoritmo << endl;
-        cerr << "Opciones válidas: BM, SA\n";
+        cerr << "Algoritmo invalido: " << algoritmo << endl;
+        cerr << "Opciones validas: BM, SA\n";
         return 1;
     }
 
@@ -52,7 +53,6 @@ int main(int argc, char* argv[]) {
     string texto = cargarDocumentos(carpeta, offsets, num_docs);
     vector<string> patrones = cargarPatrones(archivoPatrones, num_pats);
 
-
     int patrones_encontrados = 0;
 
     cout << "Cargando documentos y patrones...\n";
@@ -60,11 +60,19 @@ int main(int argc, char* argv[]) {
     cout << "Patrones cargados: " << num_pats << endl;
     cout << "Ejecutando busqueda con algoritmo: " << algoritmo << endl;
 
-    double tiempo_total = medirTiempo([&]() {
-        if (algoritmo == "SA") {
-            auto [sa, tiempoConstruccion] = construirSuffixArrayConTiempo(texto);
-            cout << "\nSuffix Array construido en " << tiempoConstruccion << " segundos.\n";
+    double tiempo_construccion = 0.0;
+    double tiempo_busqueda = 0.0;
 
+    if (algoritmo == "SA") {
+        vector<int> sa;
+
+        tiempo_construccion = medirTiempo([&]() {
+            auto resultado = construirSuffixArrayConTiempo(texto);
+            sa = resultado.first;
+            tiempo_construccion = resultado.second;
+        });
+
+        tiempo_busqueda = medirTiempo([&]() {
             for (const auto& patron : patrones) {
                 auto ocurrencias = buscarPatronSA(texto, sa, patron);
                 if (!ocurrencias.empty()) {
@@ -74,8 +82,10 @@ int main(int argc, char* argv[]) {
                     cout << "Patron \"" << patron << "\" no encontrado.\n";
                 }
             }
-
-        } else if (algoritmo == "BM") {
+        });
+    }
+    else if (algoritmo == "BM") {
+        tiempo_busqueda = medirTiempo([&]() {
             for (const auto& patron : patrones) {
                 auto posicionesBM = BoyerMooreSearch(texto, patron);
                 if (!posicionesBM.empty()) {
@@ -85,15 +95,19 @@ int main(int argc, char* argv[]) {
                     cout << "Patron \"" << patron << "\" no encontrado.\n";
                 }
             }
-        }
-    });
+        });
+    }
 
     cout << "\nResumen final:\n";
     cout << "Algoritmo utilizado: " << algoritmo << endl;
     cout << "Documentos analizados: " << num_docs << endl;
     cout << "Patrones buscados: " << num_pats << endl;
-    cout << "Patrones encontrados:" << patrones_encontrados << endl;
-    cout << "Tiempo total de ejecucion: " << tiempo_total << " segundos\n";
+    cout << "Patrones encontrados: " << patrones_encontrados << endl;
+
+    if (algoritmo == "SA")
+        cout << "Tiempo construccion estructura: " << tiempo_construccion << " segundos\n";
+
+    cout << "Tiempo total busqueda: " << tiempo_busqueda << " segundos\n";
 
     return 0;
 }
