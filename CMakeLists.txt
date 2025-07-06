@@ -9,4 +9,7 @@ add_executable(Deteccion_de_patrones_en_multiples_archivos
         algoritmos/Boyer-Moore.cpp
         estructuras/suffix_array.cpp
         algoritmos/Boyer-Moore.h
+        utils/generarPatrones.cpp
+        utils/cargarDocumentos.cpp
+        algoritmos/Robin-Karp.h
 )

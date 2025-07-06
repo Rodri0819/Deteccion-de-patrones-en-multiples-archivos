@@ -4,8 +4,10 @@
 #include <vector>
 #include <filesystem>
 
+using namespace std;
+namespace fs = std::filesystem;
 
-string cargarDocumentos(const string& carpeta, vector<size_t>& offsets, size_t limite = SIZE_MAX) {
+string cargarDocumentos(const std::string& carpeta, vector<size_t>& offsets, size_t limite = SIZE_MAX) {
     string texto;
     size_t contador = 0;
 

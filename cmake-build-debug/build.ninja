@@ -67,6 +67,18 @@ build CMakeFiles/Deteccion_de_patrones_en_multiples_archivos.dir/estructuras/suf
   OBJECT_DIR = CMakeFiles\Deteccion_de_patrones_en_multiples_archivos.dir
   OBJECT_FILE_DIR = CMakeFiles\Deteccion_de_patrones_en_multiples_archivos.dir\estructuras
 
+build CMakeFiles/Deteccion_de_patrones_en_multiples_archivos.dir/utils/generarPatrones.cpp.obj: CXX_COMPILER__Deteccion_de_patrones_en_multiples_archivos_unscanned_Debug C$:/Users/rodri/OneDrive/Escritorio/ProyectoSemestral_EDD/Deteccion-de-patrones-en-multiples-archivos/utils/generarPatrones.cpp || cmake_object_order_depends_target_Deteccion_de_patrones_en_multiples_archivos
+  DEP_FILE = CMakeFiles\Deteccion_de_patrones_en_multiples_archivos.dir\utils\generarPatrones.cpp.obj.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\Deteccion_de_patrones_en_multiples_archivos.dir
+  OBJECT_FILE_DIR = CMakeFiles\Deteccion_de_patrones_en_multiples_archivos.dir\utils
+
+build CMakeFiles/Deteccion_de_patrones_en_multiples_archivos.dir/utils/cargarDocumentos.cpp.obj: CXX_COMPILER__Deteccion_de_patrones_en_multiples_archivos_unscanned_Debug C$:/Users/rodri/OneDrive/Escritorio/ProyectoSemestral_EDD/Deteccion-de-patrones-en-multiples-archivos/utils/cargarDocumentos.cpp || cmake_object_order_depends_target_Deteccion_de_patrones_en_multiples_archivos
+  DEP_FILE = CMakeFiles\Deteccion_de_patrones_en_multiples_archivos.dir\utils\cargarDocumentos.cpp.obj.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\Deteccion_de_patrones_en_multiples_archivos.dir
+  OBJECT_FILE_DIR = CMakeFiles\Deteccion_de_patrones_en_multiples_archivos.dir\utils
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Deteccion_de_patrones_en_multiples_archivos
@@ -75,7 +87,7 @@ build CMakeFiles/Deteccion_de_patrones_en_multiples_archivos.dir/estructuras/suf
 #############################################
 # Link the executable Deteccion_de_patrones_en_multiples_archivos.exe
 
-build Deteccion_de_patrones_en_multiples_archivos.exe: CXX_EXECUTABLE_LINKER__Deteccion_de_patrones_en_multiples_archivos_Debug CMakeFiles/Deteccion_de_patrones_en_multiples_archivos.dir/main.cpp.obj CMakeFiles/Deteccion_de_patrones_en_multiples_archivos.dir/algoritmos/Boyer-Moore.cpp.obj CMakeFiles/Deteccion_de_patrones_en_multiples_archivos.dir/estructuras/suffix_array.cpp.obj
+build Deteccion_de_patrones_en_multiples_archivos.exe: CXX_EXECUTABLE_LINKER__Deteccion_de_patrones_en_multiples_archivos_Debug CMakeFiles/Deteccion_de_patrones_en_multiples_archivos.dir/main.cpp.obj CMakeFiles/Deteccion_de_patrones_en_multiples_archivos.dir/algoritmos/Boyer-Moore.cpp.obj CMakeFiles/Deteccion_de_patrones_en_multiples_archivos.dir/estructuras/suffix_array.cpp.obj CMakeFiles/Deteccion_de_patrones_en_multiples_archivos.dir/utils/generarPatrones.cpp.obj CMakeFiles/Deteccion_de_patrones_en_multiples_archivos.dir/utils/cargarDocumentos.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Deteccion_de_patrones_en_multiples_archivos.dir
