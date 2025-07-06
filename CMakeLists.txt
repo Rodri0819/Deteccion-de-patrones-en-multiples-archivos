@@ -12,4 +12,6 @@ add_executable(Deteccion_de_patrones_en_multiples_archivos
         utils/generarPatrones.cpp
         utils/cargarDocumentos.cpp
         algoritmos/Robin-Karp.h
+        algoritmos/Knuth-Morris-Pratt.h
+        algoritmos/Rabin-Karp.cpp
 )

@@ -4,6 +4,8 @@
 #include <chrono>
 #include <numeric>
 #include "algoritmos/Boyer-Moore.h"
+#include "algoritmos/Knuth-Morris-Pratt.h"
+#include "algoritmos/Robin-Karp.h"
 #include "estructuras/suffix_array.h"
 #include "utils/cargarDocumentos.h"
 namespace fs = std::filesystem;
@@ -32,7 +34,7 @@ double medirTiempo(Func f) {
 int main(int argc, char* argv[]) {
     if (argc < 4) {
         cerr << "Uso: " << argv[0] << " <num_documentos> <num_patrones> <algoritmo>\n";
-        cerr << "Algoritmos soportados: BM, SA\n";
+        cerr << "Algoritmos soportados: BM, SA, KMP, RK\n";
         return 1;
     }
 
@@ -40,9 +42,9 @@ int main(int argc, char* argv[]) {
     int num_pats = stoi(argv[2]);
     string algoritmo = argv[3];
 
-    if (algoritmo != "BM" && algoritmo != "SA") {
+    if (algoritmo != "BM" && algoritmo != "SA" && algoritmo != "KMP" && algoritmo != "RK") {
         cerr << "Algoritmo invalido: " << algoritmo << endl;
-        cerr << "Opciones validas: BM, SA\n";
+        cerr << "Opciones validas: BM, SA, KMP, RK\n";
         return 1;
     }
 
@@ -97,6 +99,32 @@ int main(int argc, char* argv[]) {
             }
         });
     }
+    else if (algoritmo == "KMP") {
+        tiempo_busqueda = medirTiempo([&]() {
+            for (const auto& patron : patrones) {
+                auto posicionesKMP = KMPAlg(texto, patron);
+                if (!posicionesKMP.empty()) {
+                    cout << "Patron \"" << patron << "\" encontrado " << posicionesKMP.size() << " veces.\n";
+                    patrones_encontrados++;
+                } else {
+                    cout << "Patron \"" << patron << "\" no encontrado.\n";
+                }
+            }
+        });
+    }
+    else if (algoritmo == "RK") {
+        tiempo_busqueda = medirTiempo([&]() {
+            for (const auto& patron : patrones) {
+                auto posicionesRK = search(texto, patron);
+                if (!posicionesRK.empty()) {
+                    cout << "Patron \"" << patron << "\" encontrado " << posicionesRK.size() << " veces.\n";
+                    patrones_encontrados++;
+                } else {
+                    cout << "Patron \"" << patron << "\" no encontrado.\n";
+                }
+            }
+        });
+    }
 
     cout << "\nResumen final:\n";
     cout << "Algoritmo utilizado: " << algoritmo << endl;
@@ -108,6 +136,5 @@ int main(int argc, char* argv[]) {
         cout << "Tiempo construccion estructura: " << tiempo_construccion << " segundos\n";
 
     cout << "Tiempo total busqueda: " << tiempo_busqueda << " segundos\n";
-
     return 0;
 }
