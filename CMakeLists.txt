@@ -11,7 +11,8 @@ add_executable(Deteccion_de_patrones_en_multiples_archivos
         algoritmos/Boyer-Moore.h
         utils/generarPatrones.cpp
         utils/cargarDocumentos.cpp
-        algoritmos/Robin-Karp.h
+        algoritmos/Rabin-Karp.h
         algoritmos/Knuth-Morris-Pratt.h
         algoritmos/Rabin-Karp.cpp
+        algoritmos/Knuth-Morris-Pratt.cpp
 )

@@ -37,7 +37,7 @@ vector<int> Sufijos(const string& patron) {
             f = i;
             while (g >= 0 && patron[g] == patron[g + m - 1 - f]) {
                 --g;
-            }   
+            }
             suff[i] = f - g;
         }
     }

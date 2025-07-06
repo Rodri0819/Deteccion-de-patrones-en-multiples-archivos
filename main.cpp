@@ -5,7 +5,7 @@
 #include <numeric>
 #include "algoritmos/Boyer-Moore.h"
 #include "algoritmos/Knuth-Morris-Pratt.h"
-#include "algoritmos/Robin-Karp.h"
+#include "algoritmos/Rabin-Karp.h"
 #include "estructuras/suffix_array.h"
 #include "utils/cargarDocumentos.h"
 namespace fs = std::filesystem;
@@ -48,8 +48,9 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
+    ////////////////////////DATOS
     string carpeta = "datasets/DNA";
-    string archivoPatrones = "patrones/Patrones_NoExistentes";
+    string archivoPatrones = "patrones/Patrones_Existentes";
 
     vector<size_t> offsets;
     string texto = cargarDocumentos(carpeta, offsets, num_docs);
@@ -102,7 +103,7 @@ int main(int argc, char* argv[]) {
     else if (algoritmo == "KMP") {
         tiempo_busqueda = medirTiempo([&]() {
             for (const auto& patron : patrones) {
-                auto posicionesKMP = KMPAlg(texto, patron);
+                auto posicionesKMP = KMPAlg(patron, texto);
                 if (!posicionesKMP.empty()) {
                     cout << "Patron \"" << patron << "\" encontrado " << posicionesKMP.size() << " veces.\n";
                     patrones_encontrados++;
@@ -115,7 +116,7 @@ int main(int argc, char* argv[]) {
     else if (algoritmo == "RK") {
         tiempo_busqueda = medirTiempo([&]() {
             for (const auto& patron : patrones) {
-                auto posicionesRK = search(texto, patron);
+                auto posicionesRK = search(patron, texto);
                 if (!posicionesRK.empty()) {
                     cout << "Patron \"" << patron << "\" encontrado " << posicionesRK.size() << " veces.\n";
                     patrones_encontrados++;
