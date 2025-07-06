@@ -58,11 +58,6 @@ int main(int argc, char* argv[]) {
 
     int patrones_encontrados = 0;
 
-    cout << "Cargando documentos y patrones...\n";
-    cout << "Documentos cargados: " << num_docs << endl;
-    cout << "Patrones cargados: " << num_pats << endl;
-    cout << "Ejecutando busqueda con algoritmo: " << algoritmo << endl;
-
     double tiempo_construccion = 0.0;
     double tiempo_busqueda = 0.0;
 
@@ -78,12 +73,6 @@ int main(int argc, char* argv[]) {
         tiempo_busqueda = medirTiempo([&]() {
             for (const auto& patron : patrones) {
                 auto ocurrencias = buscarPatronSA(texto, sa, patron);
-                if (!ocurrencias.empty()) {
-                    cout << "Patron \"" << patron << "\" encontrado " << ocurrencias.size() << " veces.\n";
-                    patrones_encontrados++;
-                } else {
-                    cout << "Patron \"" << patron << "\" no encontrado.\n";
-                }
             }
         });
     }
@@ -91,12 +80,6 @@ int main(int argc, char* argv[]) {
         tiempo_busqueda = medirTiempo([&]() {
             for (const auto& patron : patrones) {
                 auto posicionesBM = BoyerMooreSearch(texto, patron);
-                if (!posicionesBM.empty()) {
-                    cout << "Patron \"" << patron << "\" encontrado " << posicionesBM.size() << " veces.\n";
-                    patrones_encontrados++;
-                } else {
-                    cout << "Patron \"" << patron << "\" no encontrado.\n";
-                }
             }
         });
     }
@@ -104,12 +87,6 @@ int main(int argc, char* argv[]) {
         tiempo_busqueda = medirTiempo([&]() {
             for (const auto& patron : patrones) {
                 auto posicionesKMP = KMPAlg(patron, texto);
-                if (!posicionesKMP.empty()) {
-                    cout << "Patron \"" << patron << "\" encontrado " << posicionesKMP.size() << " veces.\n";
-                    patrones_encontrados++;
-                } else {
-                    cout << "Patron \"" << patron << "\" no encontrado.\n";
-                }
             }
         });
     }
@@ -117,25 +94,12 @@ int main(int argc, char* argv[]) {
         tiempo_busqueda = medirTiempo([&]() {
             for (const auto& patron : patrones) {
                 auto posicionesRK = search(patron, texto);
-                if (!posicionesRK.empty()) {
-                    cout << "Patron \"" << patron << "\" encontrado " << posicionesRK.size() << " veces.\n";
-                    patrones_encontrados++;
-                } else {
-                    cout << "Patron \"" << patron << "\" no encontrado.\n";
-                }
             }
         });
     }
-
-    cout << "\nResumen final:\n";
-    cout << "Algoritmo utilizado: " << algoritmo << endl;
-    cout << "Documentos analizados: " << num_docs << endl;
-    cout << "Patrones buscados: " << num_pats << endl;
-    cout << "Patrones encontrados: " << patrones_encontrados << endl;
-
     if (algoritmo == "SA")
         cout << "Tiempo construccion estructura: " << tiempo_construccion << " segundos\n";
 
-    cout << "Tiempo total busqueda: " << tiempo_busqueda << " segundos\n";
+    cout << tiempo_busqueda;
     return 0;
 }
