@@ -1,3 +1,10 @@
 # ninja log v6
 7	145	7733925419602045	CMakeFiles/Deteccion_de_patrones_en_multiples_archivos.dir/estructuras/suffix_array.cpp.obj	1c84cd31df7dfc2d
 2	608	7733925419546322	CMakeFiles/Deteccion_de_patrones_en_multiples_archivos.dir/algoritmos/Boyer-Moore.cpp.obj	d1b3416c5b51bee0
+137	1031	7735550489824249	CMakeFiles/Deteccion_de_patrones_en_multiples_archivos.dir/algoritmos/Rabin-Karp.cpp.obj	22030351cdd2bf20
+141	1034	7735550489864268	CMakeFiles/Deteccion_de_patrones_en_multiples_archivos.dir/algoritmos/Knuth-Morris-Pratt.cpp.obj	2ac37888a5b9b262
+120	1356	7735550489654253	CMakeFiles/Deteccion_de_patrones_en_multiples_archivos.dir/algoritmos/Boyer-Moore.cpp.obj	db228a0d88bac28a
+124	1405	7735550489694253	CMakeFiles/Deteccion_de_patrones_en_multiples_archivos.dir/estructuras/suffix_array.cpp.obj	9c5b6ae6833d5007
+113	1600	7735550489584262	CMakeFiles/Deteccion_de_patrones_en_multiples_archivos.dir/main.cpp.obj	ce83fc18e865f03a
+132	1774	7735550489774240	CMakeFiles/Deteccion_de_patrones_en_multiples_archivos.dir/utils/cargarDocumentos.cpp.obj	9bf23ade52bf5d46
+128	2049	7735550489734235	CMakeFiles/Deteccion_de_patrones_en_multiples_archivos.dir/utils/generarPatrones.cpp.obj	bdd5e28f6b885345

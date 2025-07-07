@@ -78,7 +78,7 @@ int main(int argc, char* argv[]) {
     mt19937 generador(random_device{}());
 
     //OJO: ACÁ GENERAMOS LOS PATRONES CON ACGT COMO LETRAS UNICAS DE LOS PATRONESS
-    string alfabeto = "ACGT";
+    string alfabeto = "BDHP";
     vector<string> patrones;
 
     if (modo == "EXISTEN") {

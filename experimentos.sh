@@ -3,11 +3,11 @@
 OUTPUT="resultados.csv"
 EJECUTABLE="./main.exe"
 
-DOCUMENTOS=(10 20 50 100)
+DOCUMENTOS=(25 50 75 100)
 PATRONES=(100 200 500 1000)
-ALGORITMOS=("BM" "KMP" "RK" "SA")
+ALGORITMOS=("BM" "SA" "KMP" "RK")
 
-REPETICIONES=20
+REPETICIONES=1
 
 # crear CSV si no existe
 if [ ! -f "$OUTPUT" ]; then

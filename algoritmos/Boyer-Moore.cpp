@@ -1,138 +1,67 @@
 #include <iostream>
-#include <string>
-#include <unordered_map>
 #include <vector>
+#include <string>
 #include <algorithm>
 
 using namespace std;
 
-unordered_map<char, int> TablaDeOcurrencia(const string& patron) {
-    unordered_map<char, int> tabla;
-    int m = patron.size();
-    //Recorremos el patrones de derecha a izquierda
-    for (int i = m - 1, pos = 0; i >= 0; --i, ++pos) {
-        //Si el caracter no ha sido registrado todavia
-        if (tabla.find(patron[i]) == tabla.end()) {
-            //Lo registramos con la posicion desde la derecha
-            tabla[patron[i]] = pos;
-        }
-    }
+const int TOTAL_CARACTERES = 256;
 
-    return tabla;
+void calcularMalCaracter(const string& patron, vector<int>& malCaracter) {
+    // Redimensiona el vectro malcaracter a 256 posiciones y rellena todas con -1
+    malCaracter.assign(TOTAL_CARACTERES, -1);
+    // Recorre cada posición del patrón
+    for (int i = 0; i < patron.size(); i++) {
+        //Guarda la posición i como la ultima aparición
+        malCaracter[(unsigned char)patron[i]] = i;
+    }
 }
 
+vector<int> BoyerMooreSearch(const string& texto, const string& patron) {
+    int longitudTexto = texto.size();       // Longitud del texto
+    int longitudPatron = patron.size();    // Longitud del patrón
+    vector<int> posiciones;                // Guarda las posiciones donde se encuentra el patrón
+    vector<int> malCaracter;              // Tabla de mal carácter
 
-vector<int> Sufijos(const string& patron) {
-    int m = patron.size();
-    vector<int> suff(m);
-    suff[m - 1] = m;
-    int g = m - 1;
-    int f = m - 1;
+    calcularMalCaracter(patron, malCaracter);  // Calcula la tabla de última aparición de cada carácter en el patrón
 
-    for (int i = m - 2; i >= 0; --i) {
-        if (i > g && suff[i + m - 1 - f] < i - g) {
-            suff[i] = suff[i + m - 1 - f];
-        } else {
-            if (i < g) g = i;
-            f = i;
-            while (g >= 0 && patron[g] == patron[g + m - 1 - f]) {
-                --g;
-            }
-            suff[i] = f - g;
-        }
-    }
+    int desplazamiento = 0;               // Cuánto hemos desplazado el patrón en el texto
 
-    return suff;
-}
+    // Mientras aún quede espacio suficiente para que el patrón encaje
+    while (desplazamiento <= longitudTexto - longitudPatron) {
+        int indicePatron = longitudPatron - 1;   // Empezamos comparando por la última letra del patrón
 
-vector<int> TablaDeCoincidencia(const string& patron) {
-    int m = patron.size();
-    vector<int> good_suffix(m, m);
-    vector<int> suff = Sufijos(patron);
-
-    //Caso 1: sufijos que son prefijos
-    for (int i = m - 1; i >= 0; --i) {
-        if (suff[i] == i + 1) {
-            for (int j = 0; j < m - 1 - i; ++j) {
-                if (good_suffix[j] == m) {
-                    good_suffix[j] = m - 1 - i;
-                }
-            }
-        }
-    }
-
-    //Caso 2: sufijos internos
-    for (int i = 0; i <= m - 2; ++i) {
-        good_suffix[m - 1 - suff[i]] = std::min(good_suffix[m - 1 - suff[i]], m - 1 - i);
-    }
-
-    return good_suffix;
-}
-
-std::vector<int> BoyerMooreSearch(const std::string& texto, const std::string& patron) {
-    std::vector<int> ocurrencias;
-
-    int n = texto.size();
-    int m = patron.size();
-
-    if (m == 0 || n < m) return ocurrencias;
-
-    //construir tablas auxiliares
-    std::unordered_map<char, int> malCaracter = TablaDeOcurrencia(patron);
-    std::vector<int> buenSufijo = TablaDeCoincidencia(patron);
-
-    int desplazamiento = 0;
-
-    while (desplazamiento <= n - m) {
-        int j = m - 1;
-
-        //comparar desde el final del patrón
-        while (j >= 0 && patron[j] == texto[desplazamiento + j]) {
-            j--;
+        // Comparar caracteres del patrón con el texto de derecha a izquierda
+        while (indicePatron >= 0 && patron[indicePatron] == texto[desplazamiento + indicePatron]) {
+            indicePatron--; // Si coinciden, seguimos a la izquierda
         }
 
-        if (j < 0) {
-            //coincidencia completa
-            ocurrencias.push_back(desplazamiento);
+        if (indicePatron < 0) {   // Si terminamos la comparación y todo coincidió
+            posiciones.push_back(desplazamiento);  // Guardamos la posición de la coincidencia
 
-            //tras encontrar coincidencia, avanzar según buen sufijo
-            int salto;
-            if (buenSufijo[0] > 0) {
-                salto = buenSufijo[0];
+            // Si todavía queda texto para seguir buscando
+            if (desplazamiento + longitudPatron < longitudTexto) {
+                int siguienteCaracter = (unsigned char)texto[desplazamiento + longitudPatron];
+                // Saltamos el patrón hasta alinear con la siguiente posible coincidencia
+                desplazamiento += longitudPatron - malCaracter[siguienteCaracter];
             } else {
-                salto = 1;
+                desplazamiento += 1;  // Si ya no queda más texto, avanzamos solo 1
             }
-            desplazamiento += salto;
 
         } else {
+            // Si hubo una falla en la comparación
+            int caracterActual = (unsigned char)texto[desplazamiento + indicePatron];
+            int ultimaOcurrencia = malCaracter[caracterActual]; // última aparición del carácter que falló
 
-            //fallo en j
-            int salto_bs = buenSufijo[j];
-            int salto_mc;
+            int salto = indicePatron - ultimaOcurrencia;  // Calculamos cuánto podemos saltar
 
-            char c = texto[desplazamiento + j];
-            //Busca el valor que falló en la tabla de malcaracter
-            auto it = malCaracter.find(c);
-
-            //Si c no está en el patrones
-            if (it != malCaracter.end()) {
-                // carácter sí está en el patrón, calcula cuanto mover el patrones para alinaer c con su ultima aparicion, restando j(posición fallida) - posición en la ultima aparición de c en el patrón
-                salto_mc = std::max(1, j - it->second);
-            } else {
-                // carácter no está en el patrón → saltar patrón completo
-                salto_mc = m;
+            if (salto < 1) {
+                salto = 1;  // Saltar al menos 1 si no hay mejor opción
             }
 
-            int salto;
-            if (salto_bs > 0 && salto_bs < m) {
-                salto = salto_bs;
-            } else {
-                salto = salto_mc;
-            }
-
-            desplazamiento += salto;
+            desplazamiento += salto;  // Avanzamos el patrón según el salto calculado
         }
     }
 
-    return ocurrencias;
+    return posiciones;  // Devolvemos todas las posiciones donde encontramos el patrón
 }

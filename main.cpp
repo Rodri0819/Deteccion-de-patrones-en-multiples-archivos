@@ -50,13 +50,13 @@ int main(int argc, char* argv[]) {
 
     ////////////////////////DATOS
     string carpeta = "datasets/DNA";
-    string archivoPatrones = "patrones/Patrones_Existentes";
+    string archivoPatrones = "patrones/Patrones_NoExistentes";
 
     vector<size_t> offsets;
     string texto = cargarDocumentos(carpeta, offsets, num_docs);
     vector<string> patrones = cargarPatrones(archivoPatrones, num_pats);
 
-    int patrones_encontrados = 0;
+    int patrones_encontrados = 0;  // total de ocurrencias de todos los patrones
 
     double tiempo_construccion = 0.0;
     double tiempo_busqueda = 0.0;
@@ -64,42 +64,59 @@ int main(int argc, char* argv[]) {
     if (algoritmo == "SA") {
         vector<int> sa;
 
-        tiempo_construccion = medirTiempo([&]() {
-            auto resultado = construirSuffixArrayConTiempo(texto);
-            sa = resultado.first;
-            tiempo_construccion = resultado.second;
-        });
+        auto resultado = construirSuffixArrayConTiempo(texto);
+        sa = resultado.first;
+        tiempo_construccion = resultado.second;
 
         tiempo_busqueda = medirTiempo([&]() {
             for (const auto& patron : patrones) {
                 auto ocurrencias = buscarPatronSA(texto, sa, patron);
+                patrones_encontrados += ocurrencias.size();
             }
         });
+
+        cout << tiempo_construccion << "," << tiempo_busqueda << endl;
+        cout << "Ocurrencias totales encontradas: " << patrones_encontrados << endl;
     }
+
     else if (algoritmo == "BM") {
         tiempo_busqueda = medirTiempo([&]() {
             for (const auto& patron : patrones) {
                 auto posicionesBM = BoyerMooreSearch(texto, patron);
+                patrones_encontrados += posicionesBM.size();
             }
         });
+
+        cout << tiempo_busqueda << endl;
+        cout << "Ocurrencias totales encontradas: " << patrones_encontrados << endl;
     }
+
     else if (algoritmo == "KMP") {
         tiempo_busqueda = medirTiempo([&]() {
             for (const auto& patron : patrones) {
                 auto posicionesKMP = KMPAlg(patron, texto);
+                patrones_encontrados += posicionesKMP.size();
             }
         });
+
+        cout << tiempo_busqueda << endl;
+        cout << "Ocurrencias totales encontradas: " << patrones_encontrados << endl;
     }
+
     else if (algoritmo == "RK") {
         tiempo_busqueda = medirTiempo([&]() {
             for (const auto& patron : patrones) {
                 auto posicionesRK = search(patron, texto);
+                patrones_encontrados += posicionesRK.size();
             }
         });
+
+        cout << tiempo_busqueda << endl;
+        cout << "Ocurrencias totales encontradas: " << patrones_encontrados << endl;
     }
+
     if (algoritmo == "SA")
         cout << "Tiempo construccion estructura: " << tiempo_construccion << " segundos\n";
 
-    cout << tiempo_busqueda;
     return 0;
 }
