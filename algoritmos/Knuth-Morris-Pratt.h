@@ -5,7 +5,7 @@
 #include <vector>
 
 using namespace std;
-vector<int> LongestPrefixSufix(const string&);
+vector<int> LPS(const string&);
 vector<int> KMPAlg(const string&,const string&);
 
 #endif
