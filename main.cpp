@@ -50,7 +50,7 @@ int main(int argc, char* argv[]) {
 
     ////////////////////////DATOS
     string carpeta = "datasets/DNA";
-    string archivoPatrones = "patrones/Patrones_Existentes";
+    string archivoPatrones = "patrones/Patrones_NoExistentes";
 
     vector<size_t> offsets;
     string texto = cargarDocumentos(carpeta, offsets, num_docs);
@@ -70,7 +70,7 @@ int main(int argc, char* argv[]) {
 
         tiempo_busqueda = medirTiempo([&]() {
             for (const auto& patron : patrones) {
-                auto ocurrencias = buscarPatronSA(texto,patron,sa);
+                auto ocurrencias = buscarPatronSA(texto, sa, patron);
                 patrones_encontrados += ocurrencias.size();
             }
         });
