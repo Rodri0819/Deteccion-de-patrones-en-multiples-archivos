@@ -49,7 +49,7 @@ int main(int argc, char* argv[]) {
     }
 
     ////////////////////////DATOS
-    string carpeta = "datasets/DNA";
+    string carpeta = "datasets/Pequenos";
     string archivoPatrones = "patrones/Patrones_NoExistentes";
 
     vector<size_t> offsets;
